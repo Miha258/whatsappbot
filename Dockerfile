@@ -6,8 +6,6 @@ COPY package*.json ./
 
 RUN npm install
 
-RUN chmod +x restart.sh
-
 COPY . .
 
 EXPOSE 3000
