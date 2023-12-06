@@ -2,7 +2,7 @@ FROM node:18.17.1
 
 WORKDIR /usr/src/app
 
-RUN apt-get update && apt-get install -y \
+RUN apt-get update && apt-get install -y --no-install-recommends \
     chromium \
     && rm -rf /var/lib/apt/lists/*
 
