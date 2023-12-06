@@ -37,7 +37,11 @@ class BotManager extends Client {
 }
  
 const client = new BotManager({
-    authStrategy: new LocalAuth()
+    authStrategy: new LocalAuth(),
+    puppeteer: {
+        args: ['--no-sandbox']
+    }
+
 })
 
 client.on('qr', qr => {

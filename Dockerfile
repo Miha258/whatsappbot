@@ -1,6 +1,10 @@
-FROM node
+FROM node:18.17.1
 
 WORKDIR /usr/src/app
+
+RUN apt-get update && apt-get install -y \
+    chromium \
+    && rm -rf /var/lib/apt/lists/*
 
 COPY package*.json ./
 
