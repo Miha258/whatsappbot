@@ -5,7 +5,6 @@ WORKDIR /usr/src/app
 # Install necessary dependencies
 RUN apt-get update && apt-get install -y --no-install-recommends \
     chromium \
-    nginx \
     && rm -rf /var/lib/apt/lists/*
 
 COPY package*.json ./
