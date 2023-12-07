@@ -9,7 +9,6 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     && rm -rf /var/lib/apt/lists/*
 
 # Move Nginx configuration file
-COPY ec2-107-23-126-108 /etc/nginx/sites-available/
 RUN ln -s /etc/nginx/sites-available/ec2-107-23-126-108 /etc/nginx/sites-available/
 
 # Validate Nginx configuration
