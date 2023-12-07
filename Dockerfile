@@ -16,7 +16,7 @@ RUN nginx -t
 
 # Reload Nginx (restart for simplicity)
 RUN service nginx restart
-RUN systemctl status nginx
+RUN ps aux | grep nginx
 
 # Copy and install Node.js dependencies
 COPY package*.json ./
