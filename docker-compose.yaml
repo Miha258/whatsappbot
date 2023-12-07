@@ -31,6 +31,14 @@ services:
       - ./vhost.d:/etc/nginx/vhost.d
       - ./html:/usr/share/nginx/html
       - /var/run/docker.sock:/var/run/docker.sock:ro
+  server:
+    build:
+      context: ./
+      dockerfile: Dockerfile
+    container_name: your-custom-app
+    restart: always
+    networks:
+      - proxy
 
 # Create network if it does not exist
 networks: { proxy: { name: proxy } }
