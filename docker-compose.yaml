@@ -29,12 +29,12 @@ services:
       - ./vhost.d:/etc/nginx/vhost.d
       - ./html:/usr/share/nginx/html
       - /var/run/docker.sock:/var/run/docker.sock:ro
-  server:
-    build: './'
-    container_name: server
-    restart: always
-    networks:
-      - proxy
+  # server:
+  #   build: './'
+  #   container_name: server
+  #   restart: always
+  #   networks:
+  #     - proxy
 
 # Create network if it does not exist
 networks: { proxy: { name: proxy } }
