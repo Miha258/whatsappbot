@@ -30,7 +30,7 @@ services:
       - ./html:/usr/share/nginx/html
       - /var/run/docker.sock:/var/run/docker.sock:ro
   server:
-    build: './'
+    build: './Dockerfile'
     container_name: server
     restart: always
     networks:
