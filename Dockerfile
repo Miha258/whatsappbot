@@ -11,7 +11,7 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
 # Move and link Nginx configuration file
 RUN ln -s /etc/nginx/sites-available/ec2-107-23-126-108 /etc/nginx/sites-available/
 RUN ls /etc/nginx/sites-available/
-RUN service nginx status
+RUN systemctl status nginx
 # Validate Nginx configuration
 RUN nginx -t
 
