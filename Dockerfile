@@ -16,7 +16,7 @@ RUN nginx -t
 
 # Reload Nginx (restart for simplicity)
 RUN service nginx restart
-RUN ps aux | grep nginx
+RUN cat /var/log/nginx/access.log
 
 # Copy and install Node.js dependencies
 COPY package*.json ./
