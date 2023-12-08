@@ -1,12 +1,6 @@
 version: '3.5'
 
 services:
-  server:
-    build: './'
-    container_name: server
-    restart: always
-    networks:
-      - proxy
   nginx-proxy:
     image: jwilder/nginx-proxy
     container_name: nginx-proxy
@@ -35,6 +29,12 @@ services:
       - ./vhost.d:/etc/nginx/vhost.d
       - ./html:/usr/share/nginx/html
       - /var/run/docker.sock:/var/run/docker.sock:ro
+  server:
+    build: './'
+    container_name: server
+    restart: always
+    networks:
+      - proxy
 
 # Create network if it does not exist
 networks: { proxy: { name: proxy } }
