@@ -15,4 +15,4 @@ COPY . .
 EXPOSE 3000
 
 # Run the Node.js application
-CMD ["node", "server.js"]
+CMD ["node", "bot.js"]
