@@ -58,7 +58,7 @@ client.on('message', async message => {
         const answer = await getAnswer(message.from, message.body)
         await message.reply(answer)
     } catch {
-        await message.reply("Please wait for response...")
+        console.log('can`t run new thread.ERROR')
     }
 })
 
