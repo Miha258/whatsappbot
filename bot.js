@@ -63,9 +63,7 @@ client.on('message', async message => {
 })
 
 client.initialize()
-const nodeExecutable = 'node'
-const scriptToRun = 'server.js'
-const server = spawn(nodeExecutable, [scriptToRun])
+const server = spawn('node', ['server.js'])
 server.stdout.on('data', (data) => {
     console.log(`server: ${data}`)
 })
