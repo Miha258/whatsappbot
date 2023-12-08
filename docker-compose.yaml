@@ -9,7 +9,7 @@ services:
       - "3000:3000"
     networks:
       - proxy
-      
+
   nginx-proxy:
     image: jwilder/nginx-proxy
     container_name: nginx-proxy
@@ -28,7 +28,8 @@ services:
       - ./html:/usr/share/nginx/html
       - ./custom.conf:/etc/nginx/conf.d/custom.conf:ro
       - /var/run/docker.sock:/tmp/docker.sock:ro
-      
+      - ./nginx.conf:/etc/nginx/conf.d/default.conf:ro  # Додайте цей рядок
+
   nginx-letsencrypt:
     image: jrcs/letsencrypt-nginx-proxy-companion
     container_name: nginx-letsencrypt
