@@ -49,7 +49,7 @@ client.on('qr', qr => {
 })
 
 client.on('ready', async () => {
-    await client.sendMessageToAll()
+    // await client.sendMessageToAll()
     console.log('Client is ready!')
 })
 
