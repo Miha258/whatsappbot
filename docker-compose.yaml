@@ -5,6 +5,8 @@ services:
     build: './'
     container_name: server
     restart: always
+    ports:
+      - "3000:3000"
     networks:
       - proxy
       
