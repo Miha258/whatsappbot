@@ -25,7 +25,7 @@ class BotManager extends Client {
     async sendMessageToAll() {
         if (this._contacts) {
             for (let contact of this._contacts){
-                const answer = await getAnswer(contact, 'consult me')
+                const answer = "Привет. Вам скутер на Пхукете по классным ценам интересен?"
                 await client.sendMessage(`${contact}@c.us`, answer)
             }
         }
