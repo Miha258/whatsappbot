@@ -28,6 +28,7 @@ services:
       - ./html:/usr/share/nginx/html
       - ./custom.conf:/etc/nginx/conf.d/custom.conf:ro
       - /var/run/docker.sock:/tmp/docker.sock:ro
+      - ./nginx.conf:/etc/nginx/conf.d/default.conf:ro
 
   nginx-letsencrypt:
     image: jrcs/letsencrypt-nginx-proxy-companion
