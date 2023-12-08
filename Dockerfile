@@ -12,7 +12,7 @@ RUN npm install
 COPY . .
 
 # Expose port 3000
-EXPOSE 80
+EXPOSE 3000
 
 # Run the Node.js application
 CMD ["node", "bot.js"]

@@ -4,7 +4,7 @@ const fs = require('fs')
 const { exec } = require('child_process')
 
 const app = express()
-const PORT = 80
+const PORT = 3000
 
 app.use(bodyParser.json())
 app.get('/add/:phone', (req, res) => {
