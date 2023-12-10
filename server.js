@@ -70,7 +70,7 @@ app.get('/greetings', (req, res) => {
 })
 
 
-app.get('/addGreet', (req, res) => {
+app.get('ку', (req, res) => {
   res.render('greet')
 })
 
@@ -95,8 +95,8 @@ app.get('/removeGreet/:id', (req, res) => {
   const index = greetings.findIndex((greeting) => greeting.id === parseInt(id))
 
   if (index !== -1) {
-    const removedGreeting = greetings.splice(index, 1)[0]
-    fs.writeFileSync('./greetings.json', JSON.stringify(removedGreeting, null, 2))
+    greetings.splice(index, 1)[0]
+    fs.writeFileSync('./greetings.json', JSON.stringify(greetings, null, 2))
     res.redirect('/greetings')
   } else {
     res.status(404).json({ message: 'Greeting not found' })
