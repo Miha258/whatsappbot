@@ -1,5 +1,5 @@
 const { Client, LocalAuth } = require('whatsapp-web.js')
-const fs = require('fs/promises')
+const fs = require('fs')
 const filename = 'contacts.txt'
 
 class BotManager extends Client {
