@@ -3,6 +3,7 @@ const bodyParser = require('body-parser')
 const fs = require('fs')
 const { client } = require('./client')
 const path = require('path')
+const { exec } = require('child_process')
 
 const app = express()
 const PORT = 3000
@@ -54,15 +55,10 @@ app.get('/list', (req, res) => {
 })
 
 app.get('/restart', (req, res) => {
-    const bashScriptPath = './restart.sh'
     try {
-      exec(`bash ${bashScriptPath}`, (error, stdout, stderr) => {
-        if (error) {
-            res.json({ message: `Error executing Bash script: ${error}`})
-            return
-        }
-            res.json({ message: `Bot restarted!`})
-      })
+      const script = `bash ${__dirname}/restart.sh`
+      exec(script).addListener('message', message => console.log(message))
+      res.json({ message: 'Bot restarted!'})
     } catch(e) {
         res.json({message: `An error occured: ${e}`})
     }
