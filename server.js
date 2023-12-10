@@ -3,6 +3,7 @@ const bodyParser = require('body-parser')
 const fs = require('fs')
 const { client } = require('./client')
 const path = require('path')
+const fileUpload = require('express-fileupload')
 const { exec } = require('child_process')
 
 const app = express()
@@ -11,25 +12,32 @@ const PORT = 3000
 app.set('view engine', 'ejs')
 app.set('views', path.resolve(__dirname, 'static'))
 app.use(express.static(path.resolve(__dirname, 'static')))
-
 app.use(bodyParser.json())
-app.get('/add/:phone', (req, res) => {
-  const phoneNumber = req.params.phone
-    
-  if (!phoneNumber) {
-    return res.status(400).json({ error: 'Phone number is required.' })
-  }
+app.use(fileUpload())
 
-  if (!currentPhoneNumbers.includes(phoneNumberToRemove)){
-    return res.json({ message: 'Can`t found phone number to remove' })
-  }
+app.get('/add', (req, res) => {
+  res.render('upload')
+})
 
-  if (!phoneNumberToRemove) {
-    return res.status(400).json({ error: 'Phone number is required.' })
-  }
-  fs.appendFileSync('contacts.txt', `\n${phoneNumber}`)
+app.post('/add', (req, res) => {
+  try {
+    if (!req.files || !req.files.phoneNumbersFile) {
+      return res.status(400).json({ error: 'Please choose a file to upload.' });
+    }
 
-  res.json({ message: 'Phone number added successfully.' })
+    const uploadedFile = req.files.phoneNumbersFile;
+    const phoneNumbers = uploadedFile.data.toString().split('\n');
+    phoneNumbers.forEach(phoneNumber => {
+      if (phoneNumber.trim() !== '') {
+        fs.appendFileSync('contacts.txt', `\n${phoneNumber.trim()}`);
+      }
+    });
+
+    res.json({ message: 'Phone numbers added successfully.' });
+  } catch (error) {
+    console.error('Error handling file upload:', error);
+    res.status(500).json({ error: 'Internal Server Error' });
+  }
 })
 
 app.get('/remove/:phone', (req, res) => {
@@ -70,7 +78,7 @@ app.get('/greetings', (req, res) => {
 })
 
 
-app.get('ку', (req, res) => {
+app.get('/addGreet', (req, res) => {
   res.render('greet')
 })
 

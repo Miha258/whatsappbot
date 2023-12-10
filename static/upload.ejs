@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Upload Phone Numbers</title>
+</head>
+<body>
+  <h1>Upload Phone Numbers</h1>
+
+  <form action="/add" method="post" enctype="multipart/form-data">
+    <label for="phoneNumbersFile">Choose a file:</label>
+    <input type="file" id="phoneNumbersFile" name="phoneNumbersFile" accept=".txt" required>
+    <button type="submit">Upload</button>
+  </form>
+</body>
+</html>
