@@ -68,14 +68,6 @@ app.get('/restart', (req, res) => {
     }
 })
 
-app.get('/sendGreets', async (req, res) => {
-  try {
-    await client.sendMessageToAll()
-    res.json({message: 'Greet was successfully sended'})
-  } catch (e) {
-      res.json({message: `An error occured: ${e}`})
-  }
-})
 
 app.get('/greetings', (req, res) => {
   res.json(client.getGreetings())
