@@ -63,8 +63,8 @@ app.get('/restart', (req, res) => {
         }
             res.json({ message: `Bot restarted!`})
       })
-    } catch {
-        res.json({message: 'An error occured'})
+    } catch(e) {
+        res.json({message: `An error occured: ${e}`})
     }
 })
 
