@@ -116,6 +116,16 @@ app.get('/removeGreet/:id', (req, res) => {
 })
 
 
+app.get('/sendGreetings', async (req, res) => {
+  try {
+    await client.sendMessageToAll()
+    res.status(200).json({ message: 'Greetings was sended successfully'})
+  } catch(e) {
+    res.status(400).json({ message: `An error occured: ${e}`})
+  }
+})
+
+
 app.listen(PORT, '::', () => {
   console.log(`Server is running on port ${PORT}`)
 })
