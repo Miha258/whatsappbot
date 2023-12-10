@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Greetings</title>
+</head>
+<body>
+  <h1>Greetings</h1>
+
+  <form id="greetForm">
+    <label for="greetingText">Enter Greeting Text:</label>
+    <input type="text" id="greetingText" name="text" required>
+    <button type="button" onclick="addGreeting()">Add Greeting</button>
+  </form>
+
+  <script>
+    async function addGreeting() {
+      const greetingText = document.getElementById('greetingText').value;
+
+      try {
+        const response = await fetch('/addGreet', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({ text: greetingText }),
+        });
+
+        
+        if (response.ok) {
+          const responseJSON = await response.json()
+          document.location.href = `${location.origin}/greetings`
+          alert(responseJSON.message)
+        } else {
+          const errorData = await response.json()
+          alert(errorData.message)
+        }
+      } catch (error) {
+        console.error('Error adding greeting:', error);
+        alert('An error occurred while adding the greeting.');
+      }
+    }
+  </script>
+</body>
+</html>

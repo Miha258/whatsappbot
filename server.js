@@ -1,15 +1,20 @@
 const express = require('express')
 const bodyParser = require('body-parser')
 const fs = require('fs')
-const { exec } = require('child_process')
+const { client } = require('./client')
+const path = require('path')
 
 const app = express()
 const PORT = 3000
 
+app.set('view engine', 'ejs')
+app.set('views', path.resolve(__dirname, 'static'))
+app.use(express.static(path.resolve(__dirname, 'static')))
+
 app.use(bodyParser.json())
 app.get('/add/:phone', (req, res) => {
   const phoneNumber = req.params.phone
-
+    
   if (!phoneNumber) {
     return res.status(400).json({ error: 'Phone number is required.' })
   }
@@ -50,13 +55,64 @@ app.get('/list', (req, res) => {
 
 app.get('/restart', (req, res) => {
     const bashScriptPath = './restart.sh'
-    exec(`bash ${bashScriptPath}`, (error, stdout, stderr) => {
-    if (error) {
-        res.json({ message: `Error executing Bash script: ${error}`})
-        return
+    try {
+      exec(`bash ${bashScriptPath}`, (error, stdout, stderr) => {
+        if (error) {
+            res.json({ message: `Error executing Bash script: ${error}`})
+            return
+        }
+            res.json({ message: `Bot restarted!`})
+      })
+    } catch {
+        res.json({message: 'An error occured'})
     }
-        res.json({ message: `Bot restarted!`})
-    })
+})
+
+app.get('/sendGreets', async (req, res) => {
+  try {
+    await client.sendMessageToAll()
+    res.json({message: 'Greet was successfully sended'})
+  } catch (e) {
+      res.json({message: `An error occured: ${e}`})
+  }
+})
+
+app.get('/greetings', (req, res) => {
+  res.json(client.getGreetings())
+})
+
+
+app.get('/addGreet', (req, res) => {
+  res.render('greet')
+})
+
+
+app.post('/addGreet', (req, res) => {
+  const { text } = req.body
+  const greetings = client.getGreetings()
+  const newGreeting = {
+    id: greetings.length + 1,
+    text: text,
+  }
+
+  greetings.push(newGreeting)
+  fs.writeFileSync('./greetings.json', JSON.stringify(greetings, null, 2))
+  res.status(201).json({ message: 'Greeting added successfully!' })
+})
+
+
+app.get('/removeGreet/:id', (req, res) => {
+  const { id } = req.params
+  const greetings = client.getGreetings()
+  const index = greetings.findIndex((greeting) => greeting.id === parseInt(id))
+
+  if (index !== -1) {
+    const removedGreeting = greetings.splice(index, 1)[0]
+    fs.writeFileSync('./greetings.json', JSON.stringify(removedGreeting, null, 2))
+    res.redirect('/greetings')
+  } else {
+    res.status(404).json({ message: 'Greeting not found' })
+  }
 })
 
 
