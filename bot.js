@@ -4,6 +4,7 @@ const { getAnswer } = require('./gpt')
 
 
 client.on('qr', qr => {
+    console.log(qr)
     qrcode.generate(qr, {small: true})
 })
 

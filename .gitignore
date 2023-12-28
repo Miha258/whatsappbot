@@ -1,6 +1,4 @@
 node_modules
-.wwebjs_cache
-.wwebjs_auth
 .env
 ./greetings.json
 ./contacts.txt
