@@ -9,6 +9,9 @@ services:
       - "3000:3000"
     networks:
       - proxy
+    volumes:
+      - wwebjs_cache:/path/to/wwebjs_cache
+      - wwebjs_auth:/path/to/wwebjs_auth
 
   nginx:
     image: nginx:latest
@@ -25,3 +28,7 @@ networks:
   proxy:
     name: proxy
     driver: bridge
+
+volumes:
+  wwebjs_cache:
+  wwebjs_auth:
