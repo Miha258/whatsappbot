@@ -1,2 +1,3 @@
-2023/12/28-03:30:43.229 1f603 Creating DB /Users/myhailo/Desktop/Code/dasdsad/.wwebjs_auth/session/Default/Platform Notifications since it was missing.
-2023/12/28-03:30:43.246 1f603 Reusing MANIFEST /Users/myhailo/Desktop/Code/dasdsad/.wwebjs_auth/session/Default/Platform Notifications/MANIFEST-000001
+2023/12/28-04:00:53.313 9d03 Reusing MANIFEST /Users/myhailo/Desktop/Code/dasdsad/.wwebjs_auth/session/Default/Platform Notifications/MANIFEST-000001
+2023/12/28-04:00:53.314 9d03 Recovering log #3
+2023/12/28-04:00:53.314 9d03 Reusing old log /Users/myhailo/Desktop/Code/dasdsad/.wwebjs_auth/session/Default/Platform Notifications/000003.log 
